@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.agenda.model.Telefone;
+import com.example.agenda.model.TipoTelefone;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public interface TelefoneDAO {
 
     @Query("SELECT * FROM Telefone WHERE alunoId = :alunoId LIMIT 1")
     Telefone buscaPrimeiroTelefoneDoAluno(int alunoId);
+
+    @Query("SELECT * FROM Telefone WHERE alunoId = :alunoId AND tipoTelefone = :tipoTelefone LIMIT 1")
+    Telefone buscaTelefoneDoAluno(int alunoId, TipoTelefone tipoTelefone);
 
     @Insert
     void salva(Telefone... telefones);

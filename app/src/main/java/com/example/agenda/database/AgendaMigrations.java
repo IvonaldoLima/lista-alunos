@@ -30,7 +30,7 @@ public class AgendaMigrations {
             database.execSQL("CREATE TABLE `Aluno_novo` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT, `sobrenome` TEXT, `telefoneFixo` TEXT, `email` TEXT, `momentoDeCadastro` INTEGER, `telefoneCelular` TEXT)");
 
             //Copiando os dados da tabela antiga para a nova
-            database.execSQL("INSERT INTO Aluno_novo (id, nome, telefoneFixo, email, momentoDeCadastro)"+
+            database.execSQL("INSERT INTO Aluno_novo (id, nome, telefoneFixo, email, momentoDeCadastro)" +
                     "SELECT id, nome, telefone, email, momentoDeCadastro from Aluno");
 
             //Remove tabela antiga
@@ -49,7 +49,7 @@ public class AgendaMigrations {
             database.execSQL("CREATE TABLE `Aluno_novo` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT, `sobrenome` TEXT,  `email` TEXT, `momentoDeCadastro` INTEGER)");
 
             //Copiando os dados da tabela antiga para a nova
-            database.execSQL("INSERT INTO Aluno_novo (id, nome, email, momentoDeCadastro)"+
+            database.execSQL("INSERT INTO Aluno_novo (id, nome, email, momentoDeCadastro)" +
                     "SELECT id, nome, email, momentoDeCadastro from Aluno");
 
             // Criando tabela de telefones
@@ -61,11 +61,11 @@ public class AgendaMigrations {
                     ")");
 
             //Inserindo dados de telefone do aluno
-            database.execSQL("INSERT INTO Telefone (numero, alunoId)"+
+            database.execSQL("INSERT INTO Telefone (numero, alunoId)" +
                     "SELECT telefoneFixo, id FROM Aluno");
 
 
-            database.execSQL("UPDATE Telefone SET tipoTelefone = ?", new TipoTelefone[] {TipoTelefone.FIXO});
+            database.execSQL("UPDATE Telefone SET tipoTelefone = ?", new TipoTelefone[]{TipoTelefone.FIXO});
 
             //Remove tabela antiga
             database.execSQL("DROP TABLE Aluno");
@@ -74,6 +74,7 @@ public class AgendaMigrations {
             database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
         }
     };
+
 
     public static final Migration[] TODAS_MIGRATIONS = {MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5};
 }

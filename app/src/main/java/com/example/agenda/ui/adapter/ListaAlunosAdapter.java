@@ -12,6 +12,7 @@ import com.example.agenda.asynctask.BuscaTelefoneDoAlunoTask;
 import com.example.agenda.database.AgendaDatabase;
 import com.example.agenda.database.dao.TelefoneDAO;
 import com.example.agenda.model.Aluno;
+import com.example.agenda.model.TipoTelefone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +56,19 @@ public class ListaAlunosAdapter extends BaseAdapter {
 
     private void vincula(View viewCriada, Aluno alunoDevolvido) {
         TextView nome = viewCriada.findViewById(R.id.item_aluno_nome);
-        nome.setText(alunoDevolvido.getNomeCompleto()+" "+alunoDevolvido.getDataFormatada());
-        TextView telefone = viewCriada.findViewById(R.id.item_aluno_telefone);
+        nome.setText(alunoDevolvido.getNomeCompleto());
 
-        new BuscaTelefoneDoAlunoTask(dao, alunoDevolvido.getId(), telefoneEncontrado ->{
-            telefone.setText(telefoneEncontrado.getNumero());
+        TextView dataCadastro = viewCriada.findViewById(R.id.item_aluno_data_cadastro);
+        dataCadastro.setText(alunoDevolvido.getDataDeCadastroFormatada());
+
+        TextView telefoneFixo = viewCriada.findViewById(R.id.item_aluno_telefone);
+        new BuscaTelefoneDoAlunoTask(dao, alunoDevolvido.getId(), TipoTelefone.FIXO, telefoneEncontrado ->{
+            telefoneFixo.setText(telefoneEncontrado.getNumero());
+        }).execute();
+
+        TextView telefoneCelulaar = viewCriada.findViewById(R.id.item_aluno_celular);
+        new BuscaTelefoneDoAlunoTask(dao, alunoDevolvido.getId(), TipoTelefone.CELULAR, telefoneEncontrado ->{
+            telefoneCelulaar.setText(telefoneEncontrado.getNumero());
         }).execute();
     }
 

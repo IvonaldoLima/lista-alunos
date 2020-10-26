@@ -1,6 +1,5 @@
 package com.example.agenda.ui.activity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -16,11 +15,6 @@ import com.example.agenda.R;
 import com.example.agenda.model.Aluno;
 import com.example.agenda.ui.ListaAlunoView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import static com.example.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 

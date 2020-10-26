@@ -85,7 +85,7 @@ public class Aluno implements Serializable {
         return this.nome + " " + this.sobrenome;
     }
 
-    public String getDataFormatada(){
+    public String getDataDeCadastroFormatada(){
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
         return formatador.format(momentoDeCadastro.getTime());
     }
